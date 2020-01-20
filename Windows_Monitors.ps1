@@ -76,13 +76,6 @@ elseif($monitor -eq "ping")
 		Write-Host "Unable to connect to $server"
 		Exit 102
 	}
-
-    <#
-        $Timeout = 1000
-        $Ping = New-Object System.Net.NetworkInformation.Ping
-        $Response = $Ping.Send("ec2-34-213-163-167.us-west-2.compute.amazonaws.com",$Timeout)
-        $Response.Status 
-    #>
 }
 elseif($monitor -eq "process")
 {
