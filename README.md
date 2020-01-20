@@ -1,19 +1,32 @@
-# Project Name
-Project description
+# Windows system monitors with Powershell
+This script shows basic examples of how to monitor Windows system resources using Powershell.
+
+# Prerequisites
+* Powershell v5.1
+
+# Instructions
+* <b>Server</b> - Name of the server you are targeting to monitor
+* <b>Load</b> - CPU usage in %
+* <b>Drive</b> - Drive you are checking for the amount of freespace
+* <b>Freespace</b> - Freespace in % you want to monitor for
+* <b>Amount</b> - Amount of free RAM in %
+* <b>ServiceName</b> - Name of service to check the status of (wildcards supported)
+* <b>Monitor</b> - Which type of monitor: cpu, disk, ram, service, ping, process, port
+* <b>Process</b> - Name of process you want to monitor
+* <b>Port</b> - Port you want to monitor
+
+Example:
+```
+powershell.exe -ExecutionPolicy Bypass -File "C:\Windows_Monitors.ps1" -server <myserver> -monitor <disk> -drive c -freespace 10
+```
 
 # Disclaimer
 No Support and No Warranty are provided by SMA Technologies for this project and related material. The use of this project's files is on your own risk.
 
 SMA Technologies assumes no liability for damage caused by the usage of any of the files offered here via this Github repository.
 
-# Prerequisites
-
-
-# Instructions
-
-
 # License
-Copyright 2019 SMA Technologies
+Copyright 2020 SMA Technologies
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
