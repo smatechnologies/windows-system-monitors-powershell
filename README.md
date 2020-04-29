@@ -14,6 +14,9 @@ This script shows basic examples of how to monitor Windows system resources usin
 * <b>Monitor</b> - Which type of monitor: cpu, disk, ram, service, ping, process, port
 * <b>Process</b> - Name of process you want to monitor
 * <b>Port</b> - Port you want to monitor
+* <b>Disk</b> - Disk that you want information on or to resize
+* <b>Partition</b> - Partition that you want to resize
+* <b>Size</b> - Size in GB that you want to resize the partition too
 
 Example:
 ```
