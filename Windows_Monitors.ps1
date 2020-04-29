@@ -8,7 +8,10 @@
     [String]$servicename,#name of service to check the status of, wildcards supported
     [String]$monitor,    #Which monitor to use
     [String]$process,    #Name of process you want to monitor
-    [String]$port        #Port you want to monitor
+    [String]$port,       #Port you want to monitor
+    [String]$disk,       #Disk that you want information on or to resize
+    [String]$partition,  #Partition that you want to resize
+    [String]$size        #Size in GB that you want to resize the partition too
 )
 
 if($monitor -eq "cpu")
@@ -111,6 +114,14 @@ elseif($monitor -eq "port")
 
     write-host "Exit code set to $exitcode"
     Exit $exitcode
+}
+elseif($monitor -eq "partition") 
+{
+    Get-Partition 
+}
+elseif($monitor -eq "resizePartition")
+{
+    Resize-Partition -DiskNumber $disk -PartitionNumber $partition -Size ("$size"+"GB")
 }
 else
 {
