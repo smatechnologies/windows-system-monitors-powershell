@@ -11,7 +11,7 @@ This script shows basic examples of how to monitor Windows system resources usin
 * <b>Freespace</b> - Freespace in % you want to monitor for
 * <b>Amount</b> - Amount of free RAM in %
 * <b>ServiceName</b> - Name of service to check the status of (wildcards supported)
-* <b>Monitor</b> - Which type of monitor: cpu, disk, ram, service, ping, process, port
+* <b>Monitor</b> - Which type of monitor: cpu, disk, ram, service, ping, process, port, partition, resizepartition, loggedonuser
 * <b>Process</b> - Name of process you want to monitor
 * <b>Port</b> - Port you want to monitor
 * <b>Disk</b> - Disk that you want information on or to resize
