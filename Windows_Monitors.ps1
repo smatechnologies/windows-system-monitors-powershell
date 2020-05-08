@@ -1,6 +1,6 @@
 ﻿param
 (
-    [String]$server,     #Server name
+    [String]$server = $env:ComputerName,     #Server name
     [String]$load,       #CPU usage,
     [String]$drive,      #drive letter to check space of
     [String]$freespace,  #amount of free space desired (in percent)
@@ -14,6 +14,18 @@
     [String]$size        #Size in GB that you want to resize the partition too
 )
 
+<#
+# Test variables
+$monitor = "loggedonusers"
+$load = 70
+$amount = 4000
+$serviceName = "SMA*"
+$process = "7zip"
+#$server = "bing.com"
+$port = "8181"
+#>
+
+
 if($monitor -eq "cpu")
 {
     #Checks CPUs
@@ -25,7 +37,7 @@ if($monitor -eq "cpu")
       } 
       else
       {
-        Write-Host $_.LoadPercentage "`r"
+        Write-Host "CPU load:"$_.LoadPercentage "`r"
       }
     }
 }
@@ -50,22 +62,21 @@ elseif($monitor -eq "disk")
 }
 elseif($monitor -eq "ram")
 {
-    if ((Get-WmiObject Win32_PerfRawData_PerfOS_Memory -ComputerName "$server").AvailableMbytes -lt $amount)
+    $freeRAM = (Get-WmiObject Win32_PerfRawData_PerfOS_Memory -ComputerName "$server").AvailableMbytes
+    if ($freeRAM -lt $amount)
     {
-        write-host "low memory"
+        write-host "Low memory, only $freeRAM MB remaining!"
         Exit 100
+    }
+    else
+    {
+        write-host "Memory OK, $freeRAM MB remaining"
     }
 }
 elseif($monitor -eq "service")
 {
-    #Will fail if the entered service is stopped
-    $services = @((Get-Service -ComputerName "$server" -Name "$servicename" | Where-Object {$_.status -eq "stopped"}).DisplayName)
-
-    If($services[0])
-    {
-        Write-Host $services
-        Exit 100
-    }
+    $services = Get-Service -ComputerName "$server" -Name "$servicename"
+    $services | Format-Table Name,DisplayName,Status
 }
 elseif($monitor -eq "ping")
 {
@@ -122,6 +133,10 @@ elseif($monitor -eq "partition")
 elseif($monitor -eq "resizePartition")
 {
     Resize-Partition -DiskNumber $disk -PartitionNumber $partition -Size ("$size"+"GB")
+}
+elseif($monitor -eq "loggedOnUsers")
+{
+    query.exe user /server $server
 }
 else
 {
